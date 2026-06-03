@@ -3,18 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --color-morning-bg: #fdf6ec;
+  --color-morning-bg: #FDF8F3;
   --color-morning-text: #2c1810;
-  --color-morning-accent: #c9933a;
-  --color-afternoon-bg: #f8f8f4;
+  --color-morning-accent: #F9A8D4;
+  --color-afternoon-bg: #F5EDE0;
   --color-afternoon-text: #1a2420;
-  --color-afternoon-accent: #3d7a5c;
-  --color-evening-bg: #f5e8e0;
-  --color-evening-text: #2d1a14;
-  --color-evening-accent: #c4622d;
-  --color-night-bg: #1a0800;
+  --color-afternoon-accent: #93C5FD;
+  --color-evening-bg: #2C1F0E;
+  --color-evening-text: #f5ede0;
+  --color-evening-accent: #F9A8D4;
+  --color-night-bg: #1C1008;
   --color-night-text: #f5ede0;
-  --color-night-accent: #c9933a;
+  --color-night-accent: #93C5FD;
   --accent-color: var(--color-morning-accent);
   --page-text-color: var(--color-morning-text);
 }
@@ -25,6 +25,7 @@
 
 html {
   scroll-behavior: auto;
+  overflow-x: hidden;
 }
 
 html.lenis {
@@ -46,10 +47,15 @@ html.lenis {
 body {
   margin: 0;
   min-width: 320px;
+  overflow-x: hidden;
   color: var(--color-morning-text);
   background: var(--color-morning-bg);
   font-family: 'DM Sans', sans-serif;
   text-rendering: geometricPrecision;
+}
+
+#root {
+  overflow-x: hidden;
 }
 
 body.is-loading {
@@ -90,6 +96,10 @@ a {
 .preloader .char,
 .hero-title .word {
   display: inline-block;
+}
+
+.hero-title .word {
+  overflow: hidden;
 }
 
 .cursor-fork svg {

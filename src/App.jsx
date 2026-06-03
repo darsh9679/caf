@@ -1,10 +1,12 @@
 import { useEffect, useMemo } from 'react';
 import Lenis from '@studio-freight/lenis';
 import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { Flip } from 'gsap/Flip';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { heroDishes } from './data/menu.js';
+import CategoryFilter from './components/CategoryFilter.jsx';
 import CursorFork from './components/CursorFork.jsx';
 import Footer from './components/Footer.jsx';
 import Hero from './components/Hero.jsx';
@@ -13,7 +15,7 @@ import PageTransition from './components/PageTransition.jsx';
 import Preloader from './components/Preloader.jsx';
 import TimeSection from './components/TimeSection.jsx';
 
-gsap.registerPlugin(ScrollTrigger, SplitText, Flip);
+gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText, Flip);
 gsap.ticker.lagSmoothing(0);
 
 const periods = [
@@ -22,11 +24,11 @@ const periods = [
     label: 'Morning',
     title: 'Golden starts, plated softly.',
     description:
-      'Warm light, slow coffee, and breakfast classics for Bandra mornings that deserve a little ceremony.',
-    hours: '6am-11am',
-    bgColor: '#fdf6ec',
+      'Warm light, house breads, bold coffee and breakfast plates for Bandra mornings that deserve a little ceremony.',
+    hours: '10am-1pm',
+    bgColor: '#FDF8F3',
     textColor: '#2c1810',
-    accentColor: '#c9933a',
+    accentColor: '#F9A8D4',
   },
   {
     key: 'afternoon',
@@ -34,32 +36,32 @@ const periods = [
     title: 'Bright plates for a clean pause.',
     description:
       'Airy greens, open sandwiches, and crisp textures for the sunniest stretch of the day.',
-    hours: '12pm-3pm',
-    bgColor: '#f8f8f4',
+    hours: '1pm-5pm',
+    bgColor: '#F5EDE0',
     textColor: '#1a2420',
-    accentColor: '#3d7a5c',
+    accentColor: '#93C5FD',
   },
   {
     key: 'evening',
     label: 'Evening',
-    title: 'Terracotta hours, toasted edges.',
+    title: 'Mains, melted and golden.',
     description:
-      'Small plates and comforting bites that move from workday appetite into easy conversation.',
-    hours: '4pm-7pm',
-    bgColor: '#f5e8e0',
-    textColor: '#2d1a14',
-    accentColor: '#c4622d',
+      'Hearty sandwiches, wood-fired pizzas and pasta crafted for the longest part of your day.',
+    hours: '5pm-9pm',
+    bgColor: '#2C1F0E',
+    textColor: '#f5ede0',
+    accentColor: '#F9A8D4',
   },
   {
     key: 'night',
     label: 'Night',
     title: 'Espresso mood, gold finish.',
     description:
-      'Late plates with richer spice, softer shadows, and a dessert-before-goodbye kind of glow.',
-    hours: '8pm-late',
-    bgColor: '#1a0800',
+      'End well. Desserts, specialty coffee and late-night drinks that close the evening right.',
+    hours: '9pm-11pm',
+    bgColor: '#1C1008',
     textColor: '#f5ede0',
-    accentColor: '#c9933a',
+    accentColor: '#93C5FD',
   },
 ];
 
@@ -93,7 +95,7 @@ function App() {
     };
   }, []);
 
-  useEffect(() => {
+  useGSAP(() => {
     const setPageTheme = (section) => {
       const { bgColor, textColor, accentColor } = section.dataset;
 
@@ -138,7 +140,7 @@ function App() {
       gsap.utils.toArray('.time-section').forEach((section) => {
         ScrollTrigger.create({
           trigger: section,
-          start: 'top center',
+          start: 'top 80%',
           end: 'bottom center',
           onEnter: () => setPageTheme(section),
           onEnterBack: () => setPageTheme(section),
@@ -166,6 +168,7 @@ function App() {
       <Navbar />
       <main id="menu">
         <Hero />
+        <CategoryFilter />
         {periods.map((period) => (
           <TimeSection
             accentColor={period.accentColor}
